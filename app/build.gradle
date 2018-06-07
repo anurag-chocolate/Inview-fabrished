@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "sourav.listviewapp"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    maven { url "https://adcolony.bintray.com/AdColony" }
+    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+    maven { url "https://dl.bintray.com/vdopiacorp/sdk" }
+    maven { url "http://repository.youappi.com/repository/release" }
+    // If you're using a version of Gradle greater than or equal to 4.1, you must use:
+    google()
+
+    // If you're using a version of Gradle lower than 4.1, you must use:
+    // maven { url 'https://maven.google.com' }
+
+    maven { url "https://maven.fabric.io/public" }
+
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation("com.vdopia.ads.lw:coresdk:2.5.4.1")
+    implementation("com.vdopia.ads.lw:adcolony-adapter:1.0.7")
+    implementation("com.vdopia.ads.lw:applovin-adapter:1.0.8")
+    implementation("com.vdopia.ads.lw:baidu-adapter:1.0.5")
+    implementation("com.vdopia.ads.lw:chartboost-adapter:1.0.7")
+    implementation("com.vdopia.ads.lw:facebook-adapter:1.0.5")
+    implementation("com.vdopia.ads.lw:google-adapter:1.0.8")
+    implementation("com.vdopia.ads.lw:inmobi-adapter:1.0.7")
+    implementation("com.vdopia.ads.lw:ironsrc-adapter:1.0.9")
+    implementation("com.vdopia.ads.lw:mopub-adapter:1.0.7")
+    implementation("com.vdopia.ads.lw:ogury-adapter:1.0.2")
+    implementation("com.vdopia.ads.lw:youappi-adapter:1.0.5")
+    implementation("com.vdopia.ads.lw:tapjoy-adapter:1.0.5")
+    implementation("com.vdopia.ads.lw:unity-adapter:1.0.9")
+    implementation("com.vdopia.ads.lw:vungle-adapter:1.0.5")
+    implementation("com.vdopia.ads.lw:yahoo-adapter:1.0.6")
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.devbrackets.android:exomedia:4.0.3'
+    implementation 'com.adcolony:sdk:3.3.3'
+    implementation 'com.inmobi.monetization:inmobi-ads:7.1.0'
+    implementation 'com.applovin:applovin-sdk:8.0.0'
+    implementation 'com.flurry.android:ads:10.0.0'
+    implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.7.4'
+    implementation 'com.ironsource.sdk:mediationsdk:6.7.9@jar'
+    implementation "com.youappi.sdk:youappi-sdk-android-moat:4.1.1"
+    implementation "com.google.android.gms:play-services-ads:15.0.1"
+    implementation "com.google.android.gms:play-services-gcm:15.0.1"
+
+    implementation "com.android.support:support-annotations:27.1.1"
+    implementation "com.android.support:appcompat-v7:27.1.1"
+    implementation "com.android.support:support-v4:27.1.1"
+    implementation "com.android.support:palette-v7:27.1.1"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation "com.android.support:design:27.1.1"
+
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion("27.1.1")
+            }
+        }
+    }
+}
+
